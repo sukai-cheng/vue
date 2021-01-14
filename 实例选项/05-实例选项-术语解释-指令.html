@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+        指令增强了标签的功能
+        所有的指令位置 标签的开始标签位置
+        取代之前的DOM操作
+        -->
+        <button @click=fn1()>按钮</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                fn1() {
+                    console.log('fn1---')
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

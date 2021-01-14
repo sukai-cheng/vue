@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 插值表达式 -->
+        <!-- {{count}} -->
+        <!-- <p>{{count}}</p> -->
+        <!-- <p>{{count+100}}</p> -->
+        <!-- <p>{{age>18?'成年':'未成年'}}</p> -->
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                count: 100,
+                age: 90
+            },
+
+        })
+    </script>
+</body>
+
+</html>
