@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">{{msg}}</div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            //指定当前vue实例管理的视图
+            el: '#app',
+            //指定当前实例所使用的数据
+            //data可以是一个对象
+            //实例对象.属性名
+            //通过vm.$data.msg访问数据
+            //响应式数据
+            data: {
+                msg: 'abc'
+            }
+        })
+        console.log(vm.$data.msg)
+    </script>
+</body>
+
+</html>

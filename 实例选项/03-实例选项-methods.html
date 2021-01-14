@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- {{fn1()}} -->
+        <button @click="fn1()">按钮</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        //对象的存储是无序存储，所以放在哪里都一样
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'abc'
+            },
+
+            methods: {
+                //1. 可以在视图中通过{{}}调用方法
+                //2.  vm对象.方法去调用
+                //3.  当前的vue实例对象
+                //4.  通过指令调方法
+                fn1: function () {
+                    console.log("fn1...")
+                },
+                fn2: function () {
+                    console.log(this)
+                },
+                fn3: function () {
+                    console.log(this.msg)
+                },
+                fn4: () => {
+                    //箭头函数指向不是vm实例
+                    console.log(this)
+                },
+                fn5() {
+                    console.log('fn5---')
+                    console.log(this.msg)
+                }
+
+            },
+        })
+        // vm.fn1()
+        // vm.fn2()
+        // vm.fn3()
+        // vm.fn4()
+        vm.fn5()
+    </script>
+</body>
+
+</html>
