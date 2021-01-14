@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            v-text="替换的数据"
+            作用：替换标签的全部内容
+            v-html="替换的数据"
+            作用：识别字符串中的标签
+        -->
+        <p v-text="msg">我是p标签的全部内容</p>
+        <p v-text="msg">{{count}}</p>
+        <p v-text="str"></p>
+        <p v-html="str"></p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                count: 100,
+                msg: 'abc',
+                str: '<span>span标签</span>'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>
