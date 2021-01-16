@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--
+            绑定表单元素
+            v-model="data数据"
+            把data中的值和value值进行关联
+            当输入框中国呢value值变化->data中的数据->响应式数据->{{msg}}自动更新
+        -->
+        {{msg}}
+        <input type="text" v-model="msg">
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'abc'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

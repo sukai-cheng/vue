@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #app {
+        width: 600px;
+        margin: 10px auto;
+    }
+
+    .tb {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .tb th {
+        background-color: #0094ff;
+        color: white;
+    }
+
+    .tb td,
+    .tb th {
+        padding: 5px;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .add {
+        padding: 5px;
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="add">
+            品牌名称:
+            <input type="text">
+            <input type="button" value="添加">
+        </div>
+
+        <div class="add">
+            品牌名称:
+            <input type="text" placeholder="请输入搜索条件">
+        </div>
+
+        <div>
+            <table class="tb">
+                <tr>
+                    <th>编号</th>
+                    <th>品牌名称</th>
+                    <th>创立时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(value,index) in list">
+                    <td>{{index+1}}</td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.date}}</td>
+                    <td>
+                        <a href="#">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">没有品牌数据</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        let list = [{
+            name: 'TCL',
+            date: new Date()
+        }, {
+            name: '小米',
+            date: new Date()
+        }, {
+            name: '娃娃',
+            date: new Date()
+        }]
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {
+                list
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
