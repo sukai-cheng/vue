@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p :class="{active:isActive}">container</p>
+        <button @click="isActive=!isActive">button</button>
+        <button @click="fn()">button</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {
+                isActive: true
+            },
+            methods: {
+                fn() {
+                    // 访问data中的数据需要用this
+                    this.isActive = !this.isActive;
+                }
+            },
+        })
+    </script>
+</body>
+
+
+</html>
