@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {属性A:，属性B:} -->
+        <p :class="{active:a,left:b}">container</p>
+        <p :class="obj">container</p>
+        <p :class="[left,active]">neiron</p>
+        <p :class="[aObj,bObj]">neiron</p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a: true,
+                b: true,
+                obj: {
+                    a: true,
+                    b: false
+                },
+                left: 'a',
+                active: 'b',
+                aObj: {
+                    container: true,
+
+                },
+                bObj: {
+                    foot: false
+                }
+            },
+
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-model:
+            双向数据绑定 M->V V->M
+            是简化的语法(语法糖)
+            $event.target
+        -->
+        {{msg}}
+        <input v-model="msg">button</input>
+        <input :value="msg" @input="msg=$event.target.value">button</input>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        /*实例化vue对象*/
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'abc'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+
+</html>
