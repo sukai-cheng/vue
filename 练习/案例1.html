@@ -46,7 +46,7 @@
 
         <div class="add">
             品牌名称:
-            <input type="text" placeholder="请输入搜索条件">
+            <input type="text" placeholder="请输入搜索条件" ref="ref">
         </div>
 
         <div>
@@ -96,6 +96,9 @@
             data: {
                 list,
                 itemname: ''
+            },
+            mounted() {
+                this.$refs.ref.focus()
             },
             methods: {
                 addItem() {
