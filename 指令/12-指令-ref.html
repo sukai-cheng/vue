@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- ref命令
+    给要操作的dom元素设置ref属性
+    获取要操作的dom元素
+    -->
+    <div id="app">
+        <input type="text" ref="txt">
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {},
+            mounted() {
+                console.log(this.$refs.txt) //获取dom元素this.$refs.txt
+                this.$refs.txt.focus()
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+
+</html>
