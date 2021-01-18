@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        处理前：{{msg}}
+        <br />
+        处理后:{{msg|toUpper}}
+    </div>
+    <div id="a">
+        {{str | toUpper}}
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // 全局过滤器
+        //v表示过滤器的调用者这里指msg
+        //charAt取出字符下标为0的字符
+        //substr（） 截取字符串
+        Vue.filter('toUpper', (v) => {
+            return v.charAt(0).toUpperCase() + v.substr(1)
+        })
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'abc'
+            },
+            methods: {
+
+            }
+        })
+
+        new Vue({
+            el: '#a',
+            data: {
+                str: 'chengsukai'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+
+</html>
