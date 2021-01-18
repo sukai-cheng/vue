@@ -9,14 +9,29 @@
 
 <body>
     <div id="app">
+        <!-- 过滤器传参数 -->
+        {{count | toD | toY('元')}}
+        <!-- 过滤器的串联使用 -->
+
     </div>
     <script src="../vue.js"></script>
     <script>
+        Vue.filter('toD', (v) => {
+            return '$' + v
+        })
+        Vue.filter('toY', (v, y) => {
+            return v + y
+        })
         /*实例化vue对象*/
         new Vue({
             el: '#app',
-            data: {},
+            data: {
+                count: 100
+            },
             methods: {
+
+            },
+            filters: {
 
             }
         })
