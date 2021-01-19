@@ -1,0 +1,49 @@
+{
+    "brands":[
+        {
+            "name":"TCL",
+            "date":"Tue Jan 19 2021 23:08:16 GMT+0800 (中国标准时间)",
+            "id":1
+        },
+        {
+            "name":"Huawei",
+            "date":"Tue Jan 19 2021 23:09:16 GMT+0800 (中国标准时间)",
+            "id":2
+        },
+        {
+            "name":"Apple",
+            "date":"Tue Jan 19 2021 23:10:16 GMT+0800 (中国标准时间)",
+            "id":3
+        },
+        {
+            "name":"Xiaomi",
+            "date":"Tue Jan 19 2021 23:22:16 GMT+0800 (中国标准时间)",
+            "id":4
+        },
+        {
+            "name":"xxx",
+            "date":"Tue Jan 19 2021 23:23:16 GMT+0800 (中国标准时间)",
+            "id":5
+        },
+        {
+            "name":"BlackMarray",
+            "date":"Tue Jan 19 2021 23:07:16 GMT+0800 (中国标准时间)",
+            "id":6
+        },
+        {
+            "name":"Google",
+            "date":"Tue Jan 19 2021 23:44:16 GMT+0800 (中国标准时间)",
+            "id":7
+        },
+        {
+            "name":"TCL",
+            "date":"Tue Jan 19 2021 23:06:16 GMT+0800 (中国标准时间)",
+            "id":8
+        },
+        {
+            "name":"TCL",
+            "date":"Tue Jan 19 2021 23:49:16 GMT+0800 (中国标准时间)",
+            "id":9
+        }
+    ]
+}
