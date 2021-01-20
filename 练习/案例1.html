@@ -41,13 +41,21 @@
         <div class="add">
             品牌名称:
             <input type="text" v-model="itemname">
+<<<<<<< HEAD
             <input :disabled="itemname.length===0" type="button" value="添加" @click="addItem()">
 
+=======
+            <input type="button" value="添加" @click="addItem()">
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         </div>
 
         <div class="add">
             品牌名称:
+<<<<<<< HEAD
             <input type="text" v-model="searchVal" placeholder="请输入搜索条件">
+=======
+            <input type="text" placeholder="请输入搜索条件" ref="ref">
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         </div>
 
         <div>
@@ -76,7 +84,11 @@
 
     <script src="../moment.js"></script>
     <script src="../vue.js"></script>
+<<<<<<< HEAD
     <script src="../axios.js"></script>
+=======
+    <script src="../moment.js"></script>
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
     <script>
         let list = [{
             name: 'TCL',
@@ -88,7 +100,11 @@
             name: '娃娃',
             date: new Date()
         }]
+<<<<<<< HEAD
         // 定义全局过滤器
+=======
+
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         Vue.filter('fmtDate', (v) => {
             return moment(v).format('YYYY-MM-DD hh:mm:ss')
         })
@@ -99,6 +115,9 @@
                 list,
                 itemname: '',
                 searchVal: '',
+            },
+            mounted() {
+                this.$refs.ref.focus()
             },
             methods: {
                 addItem() {
@@ -113,6 +132,7 @@
                     }
 
                 }
+<<<<<<< HEAD
             },
             computed: {
                 newlist() {
@@ -124,6 +144,9 @@
                 }
             },
 
+=======
+            }
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         })
     </script>
 </body>
