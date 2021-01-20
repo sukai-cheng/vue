@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script src="../axios.js"></script>
+    <script src="../vue.js"></script>
+    <script>
+        // axios.请求方式(url).then((res)=>{res.data}).catch((error)=>{})
+        //get查询数据
+        // axios
+        //     .get('http://localhost:3000/brands')
+        //     .then((res) => {
+        //         //对象解构赋值
+        //         const {
+        //             status,
+        //             data
+        //         } = res;
+        //         // console.log(data)
+        //     })
+        //     .catch((error) => {
+
+        //     })
+
+        // post请求
+        // axios.post('http://localhost:3000/brands', {
+        //     name: 'abcd',
+        //     date: new Date
+        // }).then((res) => {
+        //     console.log(res.status)
+        // })
+
+        //put更新数据
+        // axios.put('http://localhost:3000/brands/11', {
+        //     name: 'xxx',
+        //     date: new Date
+        // }).then((res) => {
+        //     console.log("添加成功")
+        // })
+
+        //delete 删除数据
+        axios.delete('http://localhost:3000/brands/13')
+            .then((res) => {
+                console.log("删除成功")
+            })
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+
+</html>
