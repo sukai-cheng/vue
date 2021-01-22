@@ -40,14 +40,22 @@
     <div id="app">
         <div class="add">
             品牌名称:
-            <input type="text" v-model="itemname" ref='ref'>
+            <input type="text" v-model="itemname">
+<<<<<<< HEAD
             <input :disabled="itemname.length===0" type="button" value="添加" @click="addItem()">
 
+=======
+            <input type="button" value="添加" @click="addItem()">
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         </div>
 
         <div class="add">
             品牌名称:
+<<<<<<< HEAD
             <input type="text" v-model="searchVal" placeholder="请输入搜索条件">
+=======
+            <input type="text" placeholder="请输入搜索条件" ref="ref">
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         </div>
 
         <div>
@@ -58,12 +66,12 @@
                     <th>创立时间</th>
                     <th>操作</th>
                 </tr>
-                <tr v-for="(v,i) in list" ::key="i">
-                    <td>{{v.id}}</td>
-                    <td>{{v.name}}</td>
-                    <td>{{v.date | fmtDate}}</td>
+                <tr v-for="(value,index) in newlist" ::key="index">
+                    <td>{{index+1}}</td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.date | fmtDate}}</td>
                     <td>
-                        <a href="#" @click.prevent="delItem(v.id)">删除</a>
+                        <a href="#" @click.prevent="delItem(index)">删除</a>
                     </td>
                 </tr>
                 <tr v-if="list.length === 0">
@@ -76,9 +84,27 @@
 
     <script src="../moment.js"></script>
     <script src="../vue.js"></script>
+<<<<<<< HEAD
     <script src="../axios.js"></script>
+=======
+    <script src="../moment.js"></script>
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
     <script>
+        let list = [{
+            name: 'TCL',
+            date: new Date()
+        }, {
+            name: '小米',
+            date: new Date()
+        }, {
+            name: '娃娃',
+            date: new Date()
+        }]
+<<<<<<< HEAD
         // 定义全局过滤器
+=======
+
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         Vue.filter('fmtDate', (v) => {
             return moment(v).format('YYYY-MM-DD hh:mm:ss')
         })
@@ -86,69 +112,41 @@
         new Vue({
             el: '#app',
             data: {
-                list: [],
+                list,
                 itemname: '',
                 searchVal: '',
             },
             mounted() {
                 this.$refs.ref.focus()
-                this.getAllBrands()
             },
             methods: {
-                getAllBrands() {
-                    axios.get('http://localhost:3000/brands')
-                        .then(res => {
-                            const {
-                                status,
-                                data
-                            } = res
-                            if (status == 200) {
-                                this.list = data
-                            }
-                        })
-                },
                 addItem() {
-                    axios.post('http://localhost:3000/brands', {
+                    this.list.unshift({
                         name: this.itemname,
                         date: new Date()
-                    }).then(res => {
-                        const {
-                            status
-                        } = res
-                        if (status === 201) {
-                            this.getAllBrands()
-                        }
                     })
                 },
-
-                delItem(ID) {
-                    axios.delete('http://localhost:3000/brands/' + ID)
-                        .then((res) => {
-                            const {
-                                status,
-                                data
-                            } = res;
-                            if (status == 200) {
-                                this.getAllBrands()
-                            }
-                        })
+                delItem(index) {
+                    if (confirm('Sure?')) {
+                        this.list.splice(index, 1)
+                    }
 
                 }
-            },
-            // 当监测的属性发生变化时，该方法会被调用
-            watch: {
-                //当searchVal这个值发生变化时则调用方法
-                searchVal(newV, oldV) {
-                    axios
-                        .get('http://localhost:3000/brands?name_like=' + newV) //name_like模糊搜索
-                        .then((res) => {
-                            this.list = res.data
-                        })
-                }
+<<<<<<< HEAD
             },
             computed: {
+                newlist() {
+                    return this.list.filter(
+                        (item) => {
+                            return item.name.startsWith(this.searchVal)
+                        }
+                    )
+                }
+            },
 
+=======
             }
+>>>>>>> 32582ab993ae073f5633e9b4427bccc31a912173
         })
     </script>
 </body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--兄弟组件之间
+    父子组件之间:通过bind组件
+    隔代组件之间
+-->
+<body>
+<div id="app">
+    <!--props中的a会变成组件的属性-->
+<!--    <child-a :a="num"></child-a>-->
+    <child-b :a="num"></child-b>
+</div>
+<script src="../vue.js"></script>
+<script>
+    Vue.component('child-a', {
+        //子组件中使用数据a，数据a的值来源于父组件
+        template: `
+          <div>我是child-a组件-{{ a }}</div>`,
+        //props的值来源于父组件
+        //声明一个数据，数据名叫a，此时没有值
+        props: ['a']
+    })
+    /*实例化vue对象*/
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            num: 1000
+        },
+        methods: {},
+        components: {
+            'child-b': {
+                template: `
+                  <div>我是child-b组件{{a}}</div>`,
+                props: ['a']
+            }
+        }
+    })
+</script>
+</body>
+
+
+</html>
