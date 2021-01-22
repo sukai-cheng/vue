@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <!--此时父组件是newVue，子组件是child-b-->
+    <child-b></child-b>
+    <child-c></child-c>
+</div>
+<script src="../vue.js"></script>
+<script>
+    /*在它后面的vue实例所管理的视图中*/
+    Vue.component('child-b', {
+        template: `<div>我是child-b组件</div>`
+    })
+    Vue.component('child-a', {
+        template: `<div>我是child-a组件</div>`
+    })
+    /*根组件*/
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components: {
+            'child-c': {
+                template: `<div>我是child-c组件<child-a></child-a></div>`
+            }
+        }
+    })
+</script>
+</body>
+
+
+</html>

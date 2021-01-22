@@ -9,7 +9,7 @@
 
 <body>
 <div id="app">
-    <h-p></h-p>
+    <child-a></child-a>
 </div>
 <script src="../vue.js"></script>
 <script>
@@ -30,7 +30,18 @@
     new Vue({
         el: '#app',
         data: {},
-        methods: {}
+        methods: {},
+        //通过选项定义局部组件
+        components:{
+            'child-a':{
+                template:`<div>我是child-a组件{{num}}</div>`,
+                data(){
+                    return {
+                        num: 100 //组件有自己的作用域
+                    }
+                }
+            }
+        }
     })
 </script>
 </body>
