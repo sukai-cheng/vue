@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            float: left;
+            list-style: none;
+        }
+
+        .container {
+            height: 100px;
+            border: 1px solid black;
+            clear: both;
+        }
+        .container-sub{
+            clear: both;
+            height: 50px;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <ul>
+        <router-link to="home" tag="li"><a>首页</a></router-link>
+        <router-link to="tops" tag="li"><a>热点</a></router-link>
+        <router-link to="music" tag="li"><a>音乐</a></router-link>
+    </ul>
+    <router-view class="container"></router-view>
+</div>
+<script src="../vue.js"></script>
+<script src="../vue-router.js"></script>
+<script>
+
+    let home = {
+        template: `<div>首页</div>`
+    }
+    let tops = {
+        template: `<div>热点</div>`
+    }
+    //在二级路由的组件中
+    let music = {
+        template:
+            `
+            <div>
+                <router-link to="/music/pop" tag="li"><a>流行</a></router-link>
+                <router-link to="/music/rock" tag="li"><a>摇滚</a></router-link>
+                <router-link to="/music/cal" tag="li"><a>古典</a></router-link>
+                <router-view></router-view>
+            </div>
+            `
+    }
+
+    //提供二级路由的组件
+    let musicPop = {
+        template: `<div class="container-sub">我是musicSub组件{{$route.params.id}}</div>`
+    }
+
+
+    //实例化VueRouter对象
+    let router = new VueRouter({
+        //路由选项
+        //路由配置
+        routes: [
+            {
+                path: '/home',
+                component: home
+            },
+            {
+                path: '/tops',
+                component: tops
+            },
+            {
+                path: '/music',
+                component: music,
+
+                //配置二级路由
+                children:[{
+                    path: '/music/:id',//点击三个路由渲染不同的组件
+                    component: musicPop
+                }
+                ]
+            }
+        ]
+    })
+    /*实例化vue对象*/
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router
+    })
+</script>
+</body>
+
+
+</html>
