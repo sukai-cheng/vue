@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <router-link to="/aaa">首页</router-link>
+    <router-link to="/bbb">详情</router-link>
+    <router-link to="/ccc">注册</router-link>
+    <router-view></router-view>
+</div>
+<script src="../vue.js"></script>
+<script src="../vue-router.js"></script>
+<script>
+
+    let comA = {
+        //通过$route.params.id获取对应的标识
+        template: `<div>首页{{$route.params.id}}</div>`
+    }
+
+    /*实例化vue-router对象*/
+    let router = new VueRouter({
+        routes:[
+            {
+                path:'/:id', //动态路由的写法
+                component: comA
+            }
+
+        ]
+    })
+    /*实例化vue对象*/
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+
+        },
+        router:router
+    })
+</script>
+</body>
+
+
+</html>

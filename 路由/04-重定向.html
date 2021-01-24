@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <!--重新发起请求-->
+    <router-link to="/aaa">AAA</router-link>
+    <router-link to="/bbb">BBB</router-link>
+    <router-link to="/ccc">CCC</router-link>
+    <router-link to="/ddd">DDD</router-link>
+
+    <!--组件展示的容器-->
+    <router-view></router-view>
+</div>
+<script src="../vue.js"></script>
+<script src="../vue-router.js"></script>
+<script>
+
+    //四个组件根据不同的标识展现到vue-router中
+    let comA = {
+        template: `<div>AAAAAAA</div>`
+    }
+    let comB = {
+        template: `<div>BBBBBBB</div>`
+    }
+    let comC = {
+        template: `<div>CCCCCCC</div>`
+    }
+    let comD = {
+        template: `<div>DDDDDDD</div>`
+    }
+
+    //实例化VueRouter对象
+    let router = new VueRouter({
+        //路由选项
+        //路由配置
+        routes: [
+            {
+                path: '/',
+                redirect:{
+                    // path:'/aaa'
+                    name: 'aaaa'
+                }
+            },
+            /*通配符*/
+            {
+                path:'*',
+                redirect:{
+                    path:'/aaa'
+                }
+            },
+            {
+                name: 'aaaa',
+                path: '/aaa',
+                component: comA
+            },
+            {
+                path: '/bbb',
+                component: comB
+            },
+            {
+                path: '/ccc',
+                component: comC
+            },
+            {
+                path: '/ddd',
+                component: comD
+            }
+        ]
+    })
+    /*实例化vue对象*/
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router
+    })
+</script>
+</body>
+
+
+</html>

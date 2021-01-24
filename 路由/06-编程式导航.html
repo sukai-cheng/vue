@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <!--通过tag改变样式-->
+    <router-link to="/aaa" tag="li"><a href="">首页</a></router-link>
+    <router-link to="/bbb">详情</router-link>
+    <router-link to="/ccc">注册</router-link>
+    <button @click="changeUrl()">按钮</button>
+    <router-view></router-view>
+</div>
+<script src="../vue.js"></script>
+<script src="../vue-router.js"></script>
+<script>
+
+    let comA = {
+        //通过$route.params.id获取对应的标识
+        template: `<div>我是首页</div>`
+    }
+    let comB = {
+        //通过$route.params.id获取对应的标识
+        template: `<div>我是详情页</div>`
+    }
+
+    let comC = {
+        //通过$route.params.id获取对应的标识
+        template: `<div>我是注册页</div>`
+    }
+
+
+
+    /*实例化vue-router对象*/
+    let router = new VueRouter({
+        routes:[
+            {
+                path:'/aaa', //动态路由的写法
+                component: comA
+            },
+            {
+                path:'/bbb',
+                component: comB
+            },
+            {
+                path: '/ccc',
+                component: comC
+            }
+
+        ]
+    })
+    /*实例化vue对象*/
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            //安装vue-router之后会产生$router对象
+            //js导航叫做编程式导航
+            changeUrl(){
+                //chang url mark
+                this.$router.push({path:'bbb'})
+            }
+        },
+        router:router
+    })
+</script>
+</body>
+
+
+</html>
