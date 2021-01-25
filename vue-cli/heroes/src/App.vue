@@ -3,7 +3,8 @@
     <app-nav></app-nav>
     <div class="section">
       <app-slider></app-slider>
-      <app-list></app-list>
+<!--      <app-list></app-list>-->
+      <router-view></router-view>
     </div>
 
   </div>
@@ -34,6 +35,6 @@ export default {
 <style>
 .section {
   display: grid;
-  grid-template-columns: 300px 100%;
+  grid-template-columns: 300px 1380px;
   }
 </style>
