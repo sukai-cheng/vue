@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="panel panel-default">
-      <div class="panel-heading">Panel heading</div>
+      <div class="panel-heading">Heros List</div>
       <table class="table">
         <thead>
         <tr>
