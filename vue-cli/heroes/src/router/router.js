@@ -16,7 +16,10 @@ const routes = [
   {name: 'foo', path: '/foo', component: Foo}
 ]
 
+/*实例化路由*/
 const router = new VueRouter({
+  //全局设置激活routerlink的类名
+  linkExactActiveClass:'active',
   routes
 })
 
