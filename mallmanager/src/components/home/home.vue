@@ -12,7 +12,7 @@
         </el-col>
         <el-col :span="2">
           <div class="grid-content bg-purple">
-            <a href="" class="login-out">退出</a>
+            <a href="" @click.prevent="handleLogout()" class="login-out">退出</a>
           </div>
         </el-col>
       </el-row>
@@ -114,11 +114,20 @@ export default {
     //获取token
     const token = localStorage.getItem('token')
 
-    if(!token){
-      this.$router.push({name:'login'})
+    if (!token) {
+      this.$router.push({name: 'login'})
     }
 
+
+  },
+  methods:{
+    handleLogout() {
+      localStorage.clear()
+      this.$message.success("退出成功")
+      this.$router.push('login')
+    }
   }
+
 }
 </script>
 
