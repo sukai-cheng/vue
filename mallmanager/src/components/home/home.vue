@@ -106,10 +106,24 @@
 </template>
 
 <script>
-export default {}
+export default {
+
+
+  //有实例之前自动触发
+  beforeCreate() {
+    //获取token
+    const token = localStorage.getItem('token')
+
+    if(!token){
+      this.$router.push({name:'login'})
+    }
+
+  }
+}
 </script>
 
 <style scoped>
+
 .avatar-img {
   height: 60px;
   width: 60px;
