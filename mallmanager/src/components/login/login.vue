@@ -55,7 +55,7 @@ export default {
       } = res.data
 
       if (status === 200) {
-        // this.$router.push({name:'home'})
+        this.$router.push({name:'home'})
         //保存token
         localStorage.setItem('token',data.token)
 
