@@ -48,6 +48,7 @@
         label="用户状态">
         <template slot-scope="scope">
           <el-switch
+            @change="changeMgState(scope.row)"
             v-model="scope.row.mg_state"
             active-color="#13ce66"
             inactive-color="#ff4949"
@@ -59,8 +60,9 @@
         prop="address"
         label="操作">
         <template slot-scope="scope">
-          <el-button plain size="mini" type="primary" icon="el-icon-edit" circle></el-button>
-          <el-button plain size="mini" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-button size="mini" type="primary" icon="el-icon-edit" @click="showEdituserDia(scope.row)"  circle></el-button>
+          <el-button plain size="mini" type="danger" @click="showDeleUserMsgBox(scope.row.id)" icon="el-icon-delete"
+                     circle></el-button>
           <el-button plain size="mini" type="success" icon="el-icon-check" circle></el-button>
         </template>
       </el-table-column>
@@ -100,6 +102,25 @@
         <el-button type="primary" @click="addUser()">确 定</el-button>
       </div>
     </el-dialog>
+
+<!--  编辑用户对话框  -->
+    <el-dialog title="编辑用户" :visible.sync="dialogFormVisibleEdit">
+      <el-form :model="form">
+        <el-form-item label="用户名" label-width="100px">
+          <el-input disabled v-model="form.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" label-width="100px">
+          <el-input v-model="form.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" label-width="100px">
+          <el-input v-model="form.mobile" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
+        <el-button type="primary" @click="editUser()">确 定</el-button>
+      </div>
+    </el-dialog>
   </el-card>
 </template>
 
@@ -107,6 +128,8 @@
 export default {
   data() {
     return {
+      // currUserId: -1,
+      dialogFormVisibleEdit: false,
       dialogFormVisibleAdd: false,
       form: {
         username: '',
@@ -115,30 +138,68 @@ export default {
         mobile: ''
       },
       pagenum: 1,
-      pagesize: 5,
+      pagesize: 2,
       userList: [],
       total: 0,
       query: '',
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }]
     }
   },
   created() {
     this.getUserList()
   },
   methods: {
-    async addUser(){
-      const res = await this.$http.post('users',this.form)
+    async changeMgState(user){
+      const res = await this.$http.put(`users/${user.id}/state/${user.mg_state}`)
       console.log(res)
-      const {meta:{status,msg},data} = res.data
-      if(status === 201){
+    },
+    async editUser(UserId){
+      const res = await this.$http.put(`users/${this.form.id}`,this.form)
+      const {meta: {status, msg}, data} = res.data
+      if(status === 200){
+        this.$message.success(msg)
+        //更新视图
+        this.loadUserList()
+      }else{
+        this.$message.warning(msg)
+      }
+      this.pagenum = 1
+      this.dialogFormVisibleEdit = false
+      this.form = {}
+    },
+
+    showEdituserDia(user){
+      this.form = user
+      this.dialogFormVisibleEdit = true;
+    },
+    showDeleUserMsgBox(userId) {
+      this.$confirm('删除用户', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.$http.delete(`users/${userId}`)
+        console.log(res)
+        const {meta:{status,msg}} = res.data
+        if(status === 200){
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+          this.pagenum = 1
+          this.loadUserList()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+//添加用户
+    async addUser() {
+      const res = await this.$http.post('users', this.form)
+      const {meta: {status, msg}, data} = res.data
+      if (status === 201) {
         //1.提示成功
         this.$message.success(msg)
         //更新视图
@@ -150,32 +211,38 @@ export default {
         *      this.form[key] = ""
         * }
         * */
-      }else{
+      } else {
         this.$message.warning(msg)
       }
       this.dialogFormVisibleAdd = false
-    },
+    }
+    ,
     showAddUserDia() {
       this.dialogFormVisibleAdd = true
-    },
-    //清空搜索框，重新获取数据
+    }
+    ,
+//清空搜索框，重新获取数据
     loadUserList() {
       this.getUserList()
-    },
+    }
+    ,
     searchUser() {
       this.getUserList()
-    },
-    //分页方法
+    }
+    ,
+//分页方法
     handleSizeChange(val) {
       this.pagesize = val
       this.pagenum = 1
       this.getUserList()
 
-    },
+    }
+    ,
     handleCurrentChange(val) {
       this.pagenum = val
       this.getUserList()
-    },
+    }
+    ,
     async getUserList() {
       //设置请求头
       const AUTH_TOKEN = localStorage.getItem('token')
