@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/reset.css'
 import MyServerHttp from '../src/plugins/http';
+import moment from 'moment'
 /*回顾axios插件*/
 // import axios from 'axios'
 // Vue.prototype.$http = axios
@@ -19,6 +20,10 @@ Vue.use(ElementUI)
 /* 如果你的项目为生产环境则vue自带的调试信息需不需要输出 */
 Vue.config.productionTip = false
 
+//全局过滤器
+Vue.filter('fmtDate',(v)=>{
+  return moment(v).format('YYYY-MM-DD')
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
