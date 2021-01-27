@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .test {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+        }
+
+        /*动画效果*/
+        /*.v-enter,.v-leave-to{*/
+        /*    opacity: 0;*/
+        /*    left: 300px;*/
+        /*}*/
+        /*.v-enter-to,.v-leave{*/
+        /*    opacity: 1;*/
+        /*    left: 0;*/
+        /*}*/
+
+        /*过渡效果需要自己写*/
+        /*.v-enter-active,.v-leave-active{*/
+        /*    transition: all 4s;*/
+        /*}*/
+    </style>
+</head>
+<!--在元素插入和移除时候使用过渡效果-->
+<body>
+<div id="app">
+    <!--v-if-->
+    <button @click="isShow = !isShow">按钮</button>
+
+    <!--给过渡效果的元素包裹一个组件 组件名transition-->
+    <transition
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight"
+    >
+        <div class="test" v-if="isShow">内容</div>
+    </transition>
+</div>
+<script src="../vue.js"></script>
+<script>
+    /*实例化vue对象*/
+    new Vue({
+        el: '#app',
+        data: {
+            isShow: true
+        },
+        methods: {}
+    })
+</script>
+</body>
+
+
+</html>
