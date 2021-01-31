@@ -2,20 +2,24 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import MyBread from './components/custom/myBread'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/reset.css'
 import MyServerHttp from '../src/plugins/http';
 import moment from 'moment'
+
 /*回顾axios插件*/
 // import axios from 'axios'
 // Vue.prototype.$http = axios
 
 /*把一个不是vue的第三方插件变成vue插件*/
 Vue.use(MyServerHttp)
+
 /* 使用element-ui */
 Vue.use(ElementUI)
+
 /* 我们现在是开发阶段 -> 上线阶段(生产阶段) */
 /* 如果你的项目为生产环境则vue自带的调试信息需不需要输出 */
 Vue.config.productionTip = false
@@ -24,6 +28,10 @@ Vue.config.productionTip = false
 Vue.filter('fmtDate',(v)=>{
   return moment(v).format('YYYY-MM-DD')
 })
+
+//全局自定义组件
+Vue.component('my-bread',MyBread)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
