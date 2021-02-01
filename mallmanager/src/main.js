@@ -30,7 +30,7 @@ Vue.filter('fmtDate',(v)=>{
 })
 
 //全局自定义组件
-Vue.component('my-bread',MyBread)
+Vue.component(MyBread.name,MyBread)
 
 /* eslint-disable no-new */
 new Vue({
