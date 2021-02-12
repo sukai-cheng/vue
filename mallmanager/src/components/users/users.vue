@@ -60,10 +60,12 @@
         prop="address"
         label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" icon="el-icon-edit" @click="showEdituserDia(scope.row)"  circle></el-button>
+          <el-button size="mini" type="primary" icon="el-icon-edit" @click="showEdituserDia(scope.row)"
+                     circle></el-button>
           <el-button plain size="mini" type="danger" @click="showDeleUserMsgBox(scope.row.id)" icon="el-icon-delete"
                      circle></el-button>
-          <el-button plain size="mini" type="success" icon="el-icon-check" @click="showSetUserRoleDia(scope.row)" circle></el-button>
+          <el-button plain size="mini" type="success" icon="el-icon-check" @click="showSetUserRoleDia(scope.row)"
+                     circle></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -103,7 +105,7 @@
       </div>
     </el-dialog>
 
-<!--  编辑用户对话框  -->
+    <!--  编辑用户对话框  -->
     <el-dialog title="编辑用户" :visible.sync="dialogFormVisibleEdit">
       <el-form :model="form">
         <el-form-item label="用户名" label-width="100px">
@@ -125,13 +127,13 @@
     <el-dialog title="分配角色" :visible.sync="dialogFormVisibleRol">
       <el-form :model="form">
         <el-form-item label="用户名" label-width="100px">
-          {{currUsername}}
+          {{ currUsername }}
         </el-form-item>
         <el-form-item label="角色" label-width="100px">
           <el-select v-model="currRoleId">
             <el-option label="请选择" :value="-1"></el-option>
             <el-option :label="item.roleName" :value="item.id"
-            v-for="(item,i) in roles" :key="i"
+                       v-for="(item,i) in roles" :key="i"
             ></el-option>
 
           </el-select>
@@ -149,8 +151,8 @@
 export default {
   data() {
     return {
-      currUserId:-1,
-      currRoleId:0,
+      currUserId: -1,
+      currRoleId: 0,
       dialogFormVisibleRol: false,
       dialogFormVisibleEdit: false,
       dialogFormVisibleAdd: false,
@@ -166,7 +168,7 @@ export default {
       total: 0,
       query: '',
       currUsername: '',
-      roles:[]
+      roles: []
     }
   },
   created() {
@@ -174,15 +176,15 @@ export default {
   },
   methods: {
 
-    async setRole(){
-      const res = await this.$http.put(`users/${this.currUserId}/role`,{
-        rid:this.currRoleId
+    async setRole() {
+      const res = await this.$http.put(`users/${this.currUserId}/role`, {
+        rid: this.currRoleId
       })
       console.log(res)
       this.dialogFormVisibleRol = false
     },
     //打开对话框
-    async showSetUserRoleDia(user){
+    async showSetUserRoleDia(user) {
       this.currUsername = user.username
       this.currUserId = user.id
       //获取所有的角色
@@ -192,18 +194,17 @@ export default {
       this.currRoleId = res2.data.data.rid
       this.dialogFormVisibleRol = true
     },
-    async changeMgState(user){
+    async changeMgState(user) {
       const res = await this.$http.put(`users/${user.id}/state/${user.mg_state}`)
-      // console.log(res)
     },
-    async editUser(UserId){
-      const res = await this.$http.put(`users/${this.form.id}`,this.form)
+    async editUser(UserId) {
+      const res = await this.$http.put(`users/${this.form.id}`, this.form)
       const {meta: {status, msg}, data} = res.data
-      if(status === 200){
+      if (status === 200) {
         this.$message.success(msg)
         //更新视图
         this.loadUserList()
-      }else{
+      } else {
         this.$message.warning(msg)
       }
       this.pagenum = 1
@@ -211,7 +212,7 @@ export default {
       this.form = {}
     },
 
-    showEdituserDia(user){
+    showEdituserDia(user) {
       this.form = user
       this.dialogFormVisibleEdit = true;
     },
@@ -223,8 +224,8 @@ export default {
       }).then(async () => {
         const res = await this.$http.delete(`users/${userId}`)
         console.log(res)
-        const {meta:{status,msg}} = res.data
-        if(status === 200){
+        const {meta: {status, msg}} = res.data
+        if (status === 200) {
           this.$message({
             type: 'success',
             message: msg
@@ -249,12 +250,6 @@ export default {
         //更新视图
         this.loadUserList()
         this.form = {}
-        /*
-        * for(const key in this.form){
-        *   if(this.form.hasOwnProperty(key){
-        *      this.form[key] = ""
-        * }
-        * */
       } else {
         this.$message.warning(msg)
       }
@@ -287,21 +282,18 @@ export default {
       this.getUserList()
     }
     ,
-    async getUserList() {
+    getUserList: async function () {
       //设置请求头
-      const AUTH_TOKEN = localStorage.getItem('token')
-      this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
+      this.$http.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
       const res = await this.$http.get(
         `users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`
       )
-      const {meta: {status, msg}, data: {users, total}} = res.data
+      const {meta: {status}, data: {users, total}} = res.data
       if (status === 200) {
         this.userList = users
         this.total = total
-        // this.$message.success(msg)
       } else {
-        // this.$message.warning(msg)
       }
     }
   }

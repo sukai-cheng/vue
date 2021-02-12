@@ -1,5 +1,6 @@
 <template>
   <el-container class="container">
+    <!--  导航栏  -->
     <el-header class="header">
       <el-row>
         <el-col :span="4">
@@ -17,8 +18,11 @@
         </el-col>
       </el-row>
     </el-header>
+
     <el-container>
+      <!--  侧边栏  -->
       <el-aside class="aside" width="200px">
+        <!--开启路由-->
         <el-menu
           :router="true"
           :unique-opened="true">
@@ -41,11 +45,11 @@
               <span>权限管理</span>
             </template>
 
-            <el-menu-item index="1-1">
+            <el-menu-item index="role">
               <i class="el-icon-location"></i>
               <span>角色列表</span>
             </el-menu-item>
-            <el-menu-item index="1-1">
+            <el-menu-item index="rights">
               <i class="el-icon-location"></i>
               <span>权限列表</span>
             </el-menu-item>
@@ -100,6 +104,7 @@
           </el-submenu>
         </el-menu>
       </el-aside>
+      <!--   内容展示区   -->
       <el-main class="main">
         <router-view></router-view>
       </el-main>
@@ -123,7 +128,7 @@ export default {
 
 
   },
-  methods:{
+  methods: {
     handleLogout() {
       localStorage.clear()
       this.$message.success("退出成功")
