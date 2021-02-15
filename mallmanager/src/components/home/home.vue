@@ -59,24 +59,12 @@ export default {
       menus:[]
     }
   },
-  //有实例之前自动触发
-  beforeCreate() {
-    //获取token
-    const token = localStorage.getItem('token')
-
-    if (!token) {
-      this.$router.push({name: 'login'})
-    }
-
-
-  },
   created() {
     this.getMenus()
   },
   methods: {
     async getMenus() {
       const res = await this.$http.get(`menus`)
-      console.log(res)
       this.menus = res.data.data
     },
     handleLogout() {
