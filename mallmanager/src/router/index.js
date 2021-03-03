@@ -4,6 +4,8 @@ import Home from '@/components/home/home'
 import User from '@/components/users/users'
 import Rights from '@/components/rights/rights'
 import Role from '@/components/rights/role'
+import Goodslist from '@/components/goods/goodslist'
+import GoodsAdd from '@/components/goods/goodsadd.vue'
 import Router from 'vue-router'
 import Message from "element-ui/packages/message/src/main";
 
@@ -36,6 +38,16 @@ const router = new Router({
           name: 'roles',
           path: '/roles',
           component: Role
+        },
+        {
+          name: 'goods',
+          path: '/goods',
+          component: Goodslist
+        },
+        {
+          name: 'goodsadd',
+          path: '/goodsadd',
+          component: GoodsAdd
         }
       ]
     },
@@ -57,9 +69,7 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('token')
     if (!token) {
       Message.warning('回到登录页')
-      // this.$router.push({name:'login'}) 只能在vue组件使用 this.$router是路由对象
-      // debugger
-      router.push({name: 'login',params:{ type:1 }})
+      router.push({ name: 'login', params: { type: 1 } })
     } else {
       next()
     }
