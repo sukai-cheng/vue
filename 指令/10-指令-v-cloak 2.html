@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    [v-cloak] {
+        display: none !important;
+    }
+</style>
+
+<body>
+    <div v-cloak id="app">
+        <!-- 解决插值表达式闪烁的问题
+        给最外层div设置v-cloak
+        -->
+        <p>{{msg}}</p>
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        /*实例化vue对象*/
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'abc'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+
+</html>
