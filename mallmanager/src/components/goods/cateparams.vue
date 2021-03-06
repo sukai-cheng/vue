@@ -80,7 +80,36 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="静态参数" name="2">静态参数</el-tab-pane>
+      <el-tab-pane label="静态参数" name="2">
+        <!-- 按钮 -->
+        <el-button type="danger">设置静态参数</el-button>
+        <!-- 表格 -->
+        <el-table style="width:100%" :data="arrStatparams">
+          <el-table-column type="index" label="#"> </el-table-column>
+          <el-table-column label="属性名称" prop="attr_name"> </el-table-column>
+          <el-table-column label="属性值" prop="attr_vals"> </el-table-column>
+          <el-table-column label="操作" prop="desc">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                type="primary"
+                icon="el-icon-edit"
+                @click="showEdituserDia(scope.row)"
+                circle
+              ></el-button>
+
+              <el-button
+                plain
+                size="mini"
+                type="danger"
+                @click="showDeleUserMsgBox(scope.row.id)"
+                icon="el-icon-delete"
+                circle
+              ></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
     </el-tabs>
   </el-card>
 </template>
@@ -95,6 +124,7 @@ export default {
       list: [],
       activeName: "1",
       arrDyparams: [],
+      arrStatparams: [],
       // 级联选择器绑定的数据
       options: [],
       selectedOptions: [],
@@ -110,16 +140,19 @@ export default {
   },
   methods: {
     async handleClose(scopeData, tag) {
-      console.log(scopeData);
       scopeData.attr_vals.splice(scopeData.attr_vals.indexOf(tag), 1);
       //axios请求修改数据
       let putData = {
         attr_name: scopeData.attr_name,
         attr_sel: "many",
-        attr_val: scopeData.attr_vals.join(",")
+        attr_vals: scopeData.attr_vals.join(",")
       };
+      //发送请求
       const res = await this.$http.put(
-        `categories/${this.selectedOptions[2]}/attributes/${scopeData.attr_id}`,
+        "categories/" +
+          this.selectedOptions[2] +
+          "/attributes/" +
+          scopeData.attr_id,
         putData
       );
     },
@@ -131,13 +164,15 @@ export default {
         let putData = {
           attr_name: scopeData.attr_name,
           attr_sel: "many",
-          attr_val: scopeData.attr_vals.join(",")
+          attr_vals: scopeData.attr_vals.join(",")
         };
         const res = await this.$http.put(
-          `categories/${this.selectedOptions[2]}/attributes/${scopeData.attr_id}`,
+          "categories/" +
+            this.selectedOptions[2] +
+            "/attributes/" +
+            scopeData.attr_id,
           putData
         );
-        console.log(res);
       }
       this.inputVisible = false;
       this.inputValue = "";
@@ -149,14 +184,23 @@ export default {
       });
     },
 
-    handleClick() {},
+    async handleClick() {
+      if (this.activeName === "2") {
+        if (this.selectedOptions.length === 3) {
+          //获取静态参数数据
+          const res = await this.$http.get(
+            `categories/${this.selectedOptions[2]}/attributes?sel=only`
+          );
+          this.arrStatparams = res.data.data;
+        }
+      }
+    },
 
     async handleChange() {
       if (this.selectedOptions.length === 3) {
         //获取动态参数
         //级联选择器选项发生改变时，同时，选择了三级分类
         const res = await this.$http.get(
-          FIXME: 路径错误
           `categories/${this.selectedOptions[2]}/attributes?sel=many`
         );
 
@@ -165,7 +209,6 @@ export default {
           item.attr_vals =
             item.attr_vals.length === 0 ? [] : item.attr_vals.trim().split(",");
         });
-        console.log(this.arrDyparams);
       }
     },
     //获取三级分类
