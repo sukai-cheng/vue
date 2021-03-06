@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "echarts": "^5.0.2",
     "element-tree-grid": "^0.1.4",
     "element-ui": "^2.15.0",
     "moment": "^2.29.1",
