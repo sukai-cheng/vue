@@ -6,7 +6,7 @@
 
 ### 模块说明
 
-![image-20210307011241254](/Users/chengsukai/Library/Application Support/typora-user-images/image-20210307011241254.png)
+![image-20210307011241254](https://chengsukai.oss-cn-hangzhou.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E5%9B%BE%E7%89%87/image-20210307011241254.png)
 
 ### 本地运行
 
