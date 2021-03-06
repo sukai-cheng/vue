@@ -170,6 +170,7 @@ export default {
     this.getGoodCate();
   },
   methods: {
+    handleClick() {},
     //添加商品
     async addGoods() {
       //将数组转换成以逗号分割的字符串
